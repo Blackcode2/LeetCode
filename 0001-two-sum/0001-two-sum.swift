@@ -4,16 +4,19 @@ class Solution {
         var result: [Int] = []
         
         for (index, value) in nums.enumerated() {
-            dic[index] = value
+            dic[nums[index]] = index
         }
 
         for i in 0...nums.count-1 {
-            var complement = target - dic[i]!
-            if(dic.values.contains(complement)){
-                let keys = dic.filter { $0.value == complement }.map { $0.key }
-                let filtered = keys.filter { $0 != i }
-                if(!filtered.isEmpty) {return [i, filtered[0]]}
+            var complement = target - nums[i]
+            if dic[complement] != nil && dic[complement] != i {
+                return [i, dic[complement]!]
             }
+            // if(dic.values.contains(complement)){
+            //     let keys = dic.filter { $0.value == complement }.map { $0.key }
+            //     let filtered = keys.filter { $0 != i }
+            //     if(!filtered.isEmpty) {return [i, filtered[0]]}
+            // }
         }
 
         return result
